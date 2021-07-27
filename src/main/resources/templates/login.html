@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Login</title>
+        <style>
+            
+            .flex{
+                background-color: azure;
+                width: auto;
+                height: 300px;
+                margin: 100px;
+                
+            }
+            .login{
+                background-color: blue;
+                 color: white; 
+                 height: 30px;
+                 width: 60px;
+                 border-radius: 8px;
+                  margin:10px;
+                   margin-right: -20px;
+            }
+            .signUp{
+                background-color: rgba(7, 17, 11, 0.733);
+                 color: white; 
+                 height: 30px;
+                 width: 60px;
+                 border-radius: 8px;
+                 margin-right: 50px;
+
+            }
+        </style>
+    </head>
+    <body class="text-center">
+        <div layout:fragment="content">
+            <table class="flex">
+            <form class="form-signin" th:action="@{/login}" method="post">
+               <tr><td> <h1 style="text-align: center;">Please Log in</h1></td></tr>
+                <tr><td>
+                    <div style="color: red;" th:if="${param.error}">
+                        Invalid email and password.
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div style="color: green;" th:if="${param.logout}">
+                        You have been logged out.
+                    </div>
+                </td></tr>
+                <tr>
+                    <td><label for="inputEmail" class="sr-only">Email address</label></td>
+                    <td><input style="margin:10px;" type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" /></td>
+                </tr>
+                
+                <tr>
+                  <td><label for="inputPassword" class="sr-only">Password</label></td> 
+                <td><input style="margin:10px;" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" /></td>
+                </tr>
+                <tr><td ><button  class="login" type="submit">Log in</button></td>
+            </form>
+            <form class="form-signin" th:action="@{/signup}" method="get">
+              <td>Not a Member:</td><td>  <button class="signUp" type="Submit">SignUp</button></td>
+            </tr>
+            </form>
+        </table>
+        </div>
+    </body>
+</html>

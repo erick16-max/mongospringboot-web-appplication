@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Signup</title>
+        <style>
+            .flex{
+                background-color: aquamarine;
+                height: 400px;
+                width: 450px;
+                padding: 3px;
+            }
+            .login{
+                background-color: blue;
+                 color: white; 
+                 height: 30px;
+                 width: 60px;
+                 border-radius: 8px;
+                  margin:10px;
+                   margin-right: -20px;
+            }
+            .signup{
+                background-color: rgba(7, 17, 11, 0.733);
+                 color: white; 
+                 height: 30px;
+                 width: 60px;
+                 border-radius: 8px;
+                 margin-right: 50px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div layout:fragment="content">
+           <table class="flex">
+            <form class="form-signin" th:action="@{/signup}" method="post">
+                <tr><td><h1 class="h3 mb-3 font-weight-normal">Signup Here</h1></td></tr>
+                <tr><td>
+                    <div style="color: red;" th:if="${param.error}">
+                        Invalid email and password.
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div style="color: green;" th:if="${param.logout}">
+                        You have been logged out.
+                    </div>
+                </td></tr>
+                <tr>
+                    <td><label for="inputUsername" class="sr-only">Email</label></td>
+                   <td> <input  style="margin:5px;"  type="email" name="email" id="inputEmail" class="form-control" placeholder="Enter Email" required="" /></td>
+                </tr>
+                <tr>
+                    <td><label for="inputPassword" class="sr-only">Password</label></td>
+                    <td><input style="margin:5px;" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" /></td>
+                </tr>
+                <tr>
+                    <td><label for="inputPassword" class="sr-only">Confirm Password</label></td>
+                    <td><input style="margin:5px;" type="password" name="password" id="inputPassword" class="form-control" placeholder=" Confirm Password" required="" /></td>
+                </tr>
+                <tr>
+                    <td><label for="inputFullname" class="sr-only">Full Name</label></td>
+                   <td> <input  style="margin:5px;"  type="text" name="fullname" id="inputEmail" class="form-control" placeholder="Fullname" required="" /></td>
+                </tr>
+               <tr>
+                <td><button  style="margin:5px;"  class="signup" type="submit">SignUp</button></td>
+                </form>
+                 <form class="form-signin" th:action="@{/login}" method="get">
+                <td style="font-weight: bold;">Already SignUp:</td><td><button style="margin:5px;"  class="login" type="Submit">LogIn</button></td>
+               </tr>
+            </form>
+           </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div align="center">
+<h1>Adding Data</h1>
+<form action="#" th:action="@{/add}" th:object="${data}" method="post">
+<table>
+<tr>
+<td>binaryNumber:</td>
+<td><input type="text" th:field="*{binaryNumber}"/> </td>
+</tr>
+<tr>
+<td>octalNumber:</td>
+<td><input type="text" th:field="*{octalNumber}"/> </td>
+</tr>
+<tr>
+<td colspan="2"><button type="submit">Save</button></td>
+
+</tr>
+</table>
+
+</form>
+</div>
+</body>
+</html>

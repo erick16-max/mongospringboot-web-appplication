@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Dashboard</title>
+        <style>
+            * {
+              box-sizing: border-box;
+            }
+            
+            input[type=text], select, textarea {
+              width: 100%;
+              padding: 12px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              resize: vertical;
+            }
+            
+            label {
+              padding: 12px 12px 12px 0;
+              display: inline-block;
+            }
+            
+            button {
+              background-color: #4CAF50;
+              color: white;
+              padding: 12px 20px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              float: right;
+            }
+            .stats-btn {
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              
+            }
+            
+            button:hover {
+              background-color: #45a049;
+            }
+            
+            .container {
+              border-radius: 5px;
+              padding-right: 100px;
+              padding-bottom: 20px;
+              background-color: rgb(95, 117, 136);
+              width: 75%;
+              text-align: center;
+              margin-left: 150px;
+              padding-top: 20px;
+             
+            }
+            .container-fluid {
+              background-color: #647c66;
+              margin-top: 50px;
+              border-radius: 5px;
+              padding-right: 100px;
+              padding-bottom: 20px;
+              width: 75%;
+              text-align: center;
+              margin-left: 150px;
+              padding-top: 20px;
+             
+            }
+            .col-25 {
+              float: left;
+              width: 25%;
+              margin-top: 6px;
+            }
+            
+            .col-75 {
+              float: left;
+              width: 75%;
+              margin-top: 6px;
+            }
+            
+            /* Clear floats after the columns */
+            .row:after {
+              content: "";
+              display: table;
+              clear: both;
+            }
+            .refresh{
+                font: bold 14px Arial;
+                text-decoration: none;
+                background-color: blue;
+                height: 50px;
+                width: 80px;
+                color: #fff;
+                padding: 10px 15px;
+                border-top: 1px solid #CCCCCC;
+                border-right: 1px solid #333333;
+                border-bottom: 1px solid #333333;
+                border-left: 1px solid #CCCCCC;
+                border-radius: 8px;
+                margin-right: 50px;
+
+                
+                
+            }
+            .table{
+              width: 50%;
+              background-color: #ccc;
+              margin-left: 250px;
+            }
+            
+            
+           
+            </style>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <center>
+                <h1 th:inline="text">User: [[${#httpServletRequest.remoteUser}]]</h1>
+                <h2>Binary to Octal and Decimal Convertion</h2>
+            </center>
+        </div>
+        <body onload="get()">
+
+            
+            
+            <div class="container">
+              <form class="form-signin" th:action="@{/add}" method="post">
+              <div class="row">
+                <div class="col-25">
+                  <label for="fname" style="font-weight: bold;">Input Number :</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="number" name="decimalNumber" placeholder="Text Input">
+                </div>
+              </div>
+              <div style="margin-top:20px;" class="row">
+                <div class="col-25">
+                </div>
+                <div class="col-25">
+                </div>
+                <div class="col-25">
+                    <button type="button" onclick="convertNumber()" style="margin-right: 80px;"  value="Convert">Convert</button>
+                </div>
+              </div>
+
+              <div style="margin-top:40px; background-color: #647c66;height: 200px;width:auto;padding: 16px;" class="row">
+                <center><h1 style="margin-left: 150px;">Results in Binary and octal</h1></center>
+                <div class="col-25">
+                </div>
+               
+                <div class="col-25">
+                    <input type="text" id="binary" name="binaryNumber" placeholder="Binary number"> 
+                    
+                </div>
+                <div class="col-25"></div> 
+               
+                <div class="col-25">
+                    <input type="text" id="octal" name="octalNumber" placeholder="Octal Number"> 
+                    
+                </div>
+               
+              </div>
+              <div style="margin-top:40px;" class="row">
+                <div class="col-25">
+                </div>
+                <div class="col-25">
+                     <a class="refresh" href="javascript:location.reload(true)">Refresh</a>
+                </div>
+                <div class="col-25">
+                    
+                    <button onclick="saveData()" style="margin-right: 80px;background-color: gray;font-weight: bold;color: white;" type="submit" id="save">Save</Button>
+                </div>
+              </div>
+             
+              
+             
+              </form>
+            </div>
+            <div class="container-fluid">
+              <h3>User Statictics</h3>
+             <table class="table">
+               <tr>
+                <th>Binary Number</th>
+                <th>Octal Number</th>
+               </tr>
+               <tr>
+                 <td id="binarySave"></td>
+                 <td id="octalSave"></td>
+               </tr>
+             </table>
+            </div>
+
+            <script>
+               
+                  function convertNumber(){
+                    let decimalNumber=document.getElementById("number").value;
+
+                        binaryNumber=Number.parseInt(decimalNumber,2);
+                        octalNumber=Number.parseInt(decimalNumber,8);
+                        hexaNumber=Number.parseInt(decimalNumber,16);
+
+                        document.getElementById("binary").value=binaryNumber;
+                        document.getElementById("octal").value=octalNumber;
+
+                  }
+
+
+                  var storedItem=localStorage.getItem("storedItem");
+                  function saveData(){
+                    var Item =document.getElementById("binary").value;
+                    var Item2 =document.getElementById("octal").value;
+                    
+                    localStorage.setItem("storedItem",Item);
+                    localStorage.setItem("storedItem",Item2);
+                    document.getElementById("binarySave").innerHTML =Item 
+                    document.getElementById("octalSave").innerHTML =Item2
+                  }
+
+                 function get(){
+                   localStorage.getItem("storedItem");
+                   document.getElementById("openedText").innerHTML=storedItem + "opened"
+                 }
+
+            </script>
+    </body>
+</html>
+

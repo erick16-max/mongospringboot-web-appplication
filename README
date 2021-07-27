@@ -1,0 +1,18 @@
+#THE APPLICATION WILL REQUIRE A JRE OF 11 AND ABOVE AND PRECISELY JRE 16 WAS THE DEPENDENCY USED.
+
+#HOW TO RUN ON ECLIPSE
+1. you need spring boot dependencies to run the application thus on eclipse go to help then eclipse market place
+    and spring tool suite or STS .
+
+2.You should select the tools that much your eclipse version and then install the STS in your eclipse enviroment.
+
+3.After installation of the tools click restart to restart the IDE.
+
+4. Once the IDE has been restarted , click file new folder and import your project from the 
+   directory folder.
+
+5.run the project using F5 on your project or go to your main class java file which is 
+    MongospringbootApplication.java on our project,right click and you should see a debug and run java click and run
+7.launch your browser and type the url localhost:8080 to start your web application on a browser.
+
+8.You could sign in if you do not have creadetials then after you login to view the dashboard.
